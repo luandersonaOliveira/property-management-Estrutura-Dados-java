@@ -6,23 +6,17 @@ import java.util.ArrayList;
 import Entity.Tenant;
 import Interface.ITenantRepository;
 
-public class TenantRepository extends PilhaRepository<Tenant> implements ITenantRepository {
-    //public ArrayList<Tenant> tenants = new ArrayList<>();
-
-    public TenantRepository(ArrayList<Tenant> pilha) {
-        super(pilha);
-    }
-    
-    public PilhaRepository<Tenant> tenants = new PilhaRepository<>(new ArrayList<>());
+public class TenantRepository implements ITenantRepository {
+    public ArrayList<Tenant> tenants = new ArrayList<>();
 
     @Override
     public void addTenant(Tenant tenant) {
-        tenants.push(tenant);
+        tenants.add(tenant);
     }
 
     @Override
-    public void removeTenant() {
-        tenants.pop();
+    public void removeTenant(int id) {
+        tenants.remove(id);
     }
 
     @Override
@@ -30,9 +24,9 @@ public class TenantRepository extends PilhaRepository<Tenant> implements ITenant
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'changeTenant'");
     }
-    
+
     @Override
-    public PilhaRepository<Tenant> listTenant() {
+    public ArrayList<Tenant> listTenant() {
         return tenants;
     }
 

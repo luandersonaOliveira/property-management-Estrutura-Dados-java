@@ -1,17 +1,18 @@
 package Interface;
 // Interface Repositório de Inquilinos
 
-import Containers.PilhaRepository;
+import java.util.ArrayList;
+
 import Entity.Tenant;
 
 public interface ITenantRepository {
     public void addTenant(Tenant tenant);
 
-    public void removeTenant();
+    public void removeTenant(int id);
 
     public void changeTenant(int id);
 
-    public PilhaRepository<Tenant> listTenant();
+    public ArrayList<Tenant> listTenant();
 
     public Tenant searchTenant(int id);
 }

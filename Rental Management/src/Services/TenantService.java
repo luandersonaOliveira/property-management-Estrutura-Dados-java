@@ -1,19 +1,19 @@
 package Services;
-// Sreviço Inquilino
+// Serviço Inquilino
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Containers.PilhaRepository;
 import Containers.TenantRepository;
 import Entity.Tenant;
 import Enum.EnumTenantException;
 import Exceptions.TenantException;
 
 public class TenantService {
-    // ATRIBUTOS
+    // ATTRIBUTES
+
     private static final Scanner scanner = new Scanner(System.in);
-    private TenantRepository tenantRepository = new TenantRepository(new ArrayList<>());
+    private TenantRepository tenantRepository = new TenantRepository();
 
     // CONSTRUCTOR
 
@@ -21,9 +21,7 @@ public class TenantService {
         this.tenantRepository = tenantRepository;
     }
 
-    // METODOS ESPECIAS
-
-    // METODOS PERSONALIZADOS
+    // METHODS PERSONALIZED
 
     // CREATE
     public void addTenant(String name, String cpf, String telephone, String email, double balance)
@@ -104,19 +102,19 @@ public class TenantService {
     }
 
     // REMOVE
-    public void removeTenant() {
-        if (tenantRepository.tenants.empty()) {
+    public void removeTenant(int id) {
+        if (tenantRepository.tenants.isEmpty()) {
             System.out.println(("Erro: " + EnumTenantException.TenantNoRegistered));
         } else {
-            Tenant pop = tenantRepository.tenants.pop();
-            System.out.println("\nInquilino: " + pop.getName() + ". Removido com sucesso!");
+            tenantRepository.tenants.remove(id);
+            System.out.println("\nInquilino: " + id + ". Removido com sucesso!");
         }
     }
 
     // LIST
     public void listTenant() {
-        PilhaRepository<Tenant> tenants = tenantRepository.listTenant();
-        if (tenants.empty()) {
+        ArrayList<Tenant> tenants = tenantRepository.listTenant();
+        if (tenants.isEmpty()) {
             System.out.println(("Erro: " + EnumTenantException.TenantNoRegistered));
         } else {
             for (int i = 0; i < tenants.size(); i++) {
@@ -136,7 +134,7 @@ public class TenantService {
 
     // CHANGE
     public void changeTenant(int id) throws TenantException {
-        if (tenantRepository.tenants.empty()) {
+        if (tenantRepository.tenants.isEmpty()) {
             System.out.println(("Erro: " + EnumTenantException.TenantNoRegistered));
         } else {
             if (id < 0 || id >= tenantRepository.tenants.size()) {
@@ -182,7 +180,7 @@ public class TenantService {
         }
     }
 
-    // BUSCA
+    // SEARCH
     public void searchTenant(int id) {
         try {
             Tenant tenant = tenantRepository.searchTenant(id);
